@@ -61,3 +61,7 @@ The source is organized as a standalone repository and has no runtime dependenci
 ## Project status
 
 The live page is an independent Codex demonstration. OpenAI is not affiliated with or endorsing this project, and the project does not imply that OpenAI built or tested it.
+
+## Codex skills
+
+- [Work Brief Builder](plugins/work-brief-builder/README.md) — turn an unclear request into a bounded, reviewable work brief. Includes a fictional before-and-after example and is designed for practical use in Codex trainings.

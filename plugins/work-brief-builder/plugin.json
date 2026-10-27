@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "work-brief-builder",
+  "version": "0.1.0",
+  "description": "Turn an unclear request into a focused, reviewable work brief with explicit scope, inputs, assumptions, and acceptance criteria.",
+  "author": {
+    "name": "Andreas Hacklinger"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Work Brief Builder",
+        "shortDescription": "Create clear work briefs",
+        "longDescription": "Shape an unclear request into a practical brief that makes the intended outcome, boundaries, inputs, open questions, and review conditions visible before work begins.",
+        "developerName": "Andreas Hacklinger",
+        "category": "Productivity",
+        "capabilities": ["Interactive"],
+        "defaultPrompt": [
+          "Turn my request into a clear work brief.",
+          "Help me identify what is missing from this brief.",
+          "Show me a fictional before-and-after example."
+        ]
+      }
+    }
+  }
+}
