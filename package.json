@@ -1,0 +1,13 @@
+{
+  "name": "codex-sales-research-studio",
+  "version": "0.2.0",
+  "private": true,
+  "description": "A local-first, evidence-led account research brief builder.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/preview.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

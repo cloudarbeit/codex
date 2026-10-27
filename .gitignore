@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.openai/
+.wrangler/
+.sites-runtime/
+.env*
+.DS_Store
+Thumbs.db
+*.tar.gz
+/docs/GITHUB-PUBLISHING.md

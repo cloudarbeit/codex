@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f3f2ec">
+  <meta name="description" content="A local-first evidence brief builder for public business research. Record sources, separate signals from unknowns, and export a reviewable brief.">
+  <title>Codex Sales Research Studio</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <header class="topbar wrap">
+    <a class="brand" href="#top" aria-label="Codex Sales Research Studio"><span class="brand-mark">R</span><span><b>RESEARCH STUDIO</b><small>Codex Sales Research Studio</small></span></a>
+    <nav class="topnav" aria-label="Page navigation"><a href="#workspace">Workspace</a><a href="#report">Brief</a><a href="#privacy">Privacy & method</a><span class="build-tag">Built with Codex</span><button class="language-toggle" id="language-toggle" type="button" aria-label="Switch language">DE · Deutsch</button></nav>
+  </header>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dot"></span>A practical account-research workflow · built with Codex</div><h1>Go from scattered notes to a <em>clear next step.</em></h1><p>Prepare an account brief you can review and share: keep source links beside your observations, separate possible signals from unknowns, and leave with focused questions and follow-up tasks.</p><div class="hero-actions"><a class="button button-dark" href="#workspace">Build an account brief <span aria-hidden="true">↓</span></a><button class="button button-light" id="load-sample">See a finished sample</button></div><p class="hero-promise">Useful for preparing a customer conversation, handing research to a colleague, or keeping your own follow-up straight.</p></div>
+      <aside class="hero-note sample-preview" aria-label="Preview of a fictional example brief"><div class="note-mark">EXAMPLE OUTPUT · FICTIONAL</div><div class="preview-title-row"><span class="preview-stamp">ACCOUNT BRIEF</span><span class="preview-dot"></span></div><h2>Fieldhouse Workwear</h2><p class="preview-context">A concise account snapshot, ready for your review.</p><div class="preview-item"><span class="preview-ref">E-01</span><span><b>Possible signal</b><small>Public page mentions recurring team orders.</small></span></div><div class="preview-item preview-unknown"><span class="preview-ref">?</span><span><b>Still unknown</b><small>Who owns supplier decisions?</small></span></div><div class="preview-next"><span>NEXT STEP</span><b>Verify the ordering path, then prepare a relevant question.</b></div><div class="note-meta"><span>SOURCE-LINKED</span><span>REVIEWABLE</span><span>EDITABLE</span></div></aside>
+    </section>
+
+    <section class="status-strip" aria-label="How this tool handles data"><span><i class="check">✓</i> Manual, source-linked evidence</span><span><i class="check">✓</i> User labels signals and confidence</span><span><i class="check">✓</i> Browser-only workspace</span><span><i class="check">✓</i> Export before sharing</span></section>
+
+    <section class="value-strip" aria-label="What you get from the workflow"><article><span>01 · PREPARE</span><b>One account, one working brief</b><p>Keep company context, source notes, and the question you are researching together.</p></article><article><span>02 · JUDGE</span><b>Know what is evidence and what is still open</b><p>Show possible signals with their source, and make gaps visible before you act.</p></article><article><span>03 · FOLLOW THROUGH</span><b>Leave with a concrete next move</b><p>Capture follow-up tasks and shape an editable first-contact draft from a note you selected.</p></article></section>
+
+    <section id="workspace" class="section-heading"><div><div class="section-index">01 — BUILD A RESEARCH PACK</div><h2>Your workspace</h2></div><div class="workspace-actions"><label class="save-switch"><input type="checkbox" id="remember-data"><span class="switch-ui"></span><span>Remember on this device</span></label><button class="text-button" id="clear-workspace">Clear workspace</button></div></section>
+
+    <section class="workspace-grid">
+      <div class="column-main">
+        <article class="card lead-card">
+          <div class="card-heading"><div class="step-number">01</div><div><h3>Account context</h3><p>Describe the company and your working hypothesis.</p></div><span id="lead-badge" class="badge muted">NO ACCOUNT</span></div>
+          <form id="lead-form" class="form-grid">
+            <label class="field"><span>Company or account name</span><input id="company-name" name="company" maxlength="120" required placeholder="e.g. Northstar Components"></label>
+            <label class="field"><span>Public website</span><input id="company-url" name="url" maxlength="2000" type="url" placeholder="https://example.com" required><small>Saved as a reference only. This app does not open or crawl it.</small></label>
+            <label class="field"><span>Segment or context <small>optional</small></span><input id="company-segment" name="segment" maxlength="160" placeholder="e.g. B2B manufacturing"></label>
+            <label class="field"><span>Research question <small>optional</small></span><input id="research-question" name="question" maxlength="240" placeholder="What workflow or need are we trying to understand?"></label>
+            <div class="form-actions"><button class="button button-dark" type="submit">Save account context</button><span id="lead-message" class="inline-message" role="status"></span></div>
+          </form>
+        </article>
+
+        <article class="card evidence-card">
+          <div class="card-heading"><div class="step-number">02</div><div><h3>Evidence ledger</h3><p>Add a fact you observed and where you observed it.</p></div><span id="evidence-count" class="badge muted">0 SOURCES</span></div>
+          <form id="evidence-form" class="form-grid">
+            <label class="field"><span>Source title</span><input id="source-title" maxlength="140" required placeholder="e.g. Services page"></label>
+            <label class="field"><span>Source URL</span><input id="source-url" type="url" maxlength="2000" required placeholder="https://example.com/services"><small>HTTPS links only. The link opens only if you click it.</small></label>
+            <label class="field"><span>Your observation</span><textarea id="source-note" rows="3" maxlength="1000" required placeholder="What does the page explicitly say? Keep this to an observable point."></textarea></label>
+            <div class="two-fields">
+              <label class="field"><span>How are you classifying it?</span><select id="source-kind"><option value="signal">Potential signal</option><option value="constraint">Constraint or risk</option><option value="unknown">Open question / not established</option></select></label>
+              <label class="field"><span>Your confidence in this note</span><select id="source-confidence"><option value="high">High — direct and clear</option><option value="medium" selected>Medium — reasonable reading</option><option value="low">Low — needs checking</option></select></label>
+            </div>
+            <div class="form-actions"><button class="button button-green" type="submit" id="add-evidence" disabled>Add source note</button><span id="evidence-message" class="inline-message" role="status">Save an account first.</span></div>
+          </form>
+          <div class="ledger-heading"><h4>Recorded observations</h4><span>YOUR NOTES · NOT AUTOMATICALLY VERIFIED</span></div>
+          <div id="evidence-list" class="evidence-list"><div class="empty-state">No evidence yet. Add a source note above or load the fictional sample.</div></div>
+        </article>
+
+        <article class="card question-card">
+          <div class="card-heading"><div class="step-number">03</div><div><h3>What is still unknown?</h3><p>Keep missing internal context explicit instead of filling it with guesses.</p></div><span id="question-count" class="badge muted">0 OPEN</span></div>
+          <form id="question-form" class="inline-form"><label class="sr-only" for="new-question">Add an open question</label><input id="new-question" maxlength="240" placeholder="e.g. Who owns the current process?" required><button class="button button-outline" id="add-question" type="submit" disabled>Add question</button></form>
+          <ul id="question-list" class="question-list"><li class="empty-inline">No open questions recorded.</li></ul>
+        </article>
+      </div>
+
+      <aside class="column-side">
+        <article class="card coverage-card">
+          <div class="card-heading compact"><div><div class="section-index">LIVE COVERAGE</div><h3>Research pack</h3></div><span class="coverage-icon">↗</span></div>
+          <div class="coverage-number"><strong id="coverage-total">0</strong><span>source notes</span></div>
+          <div class="coverage-bars"><div><span>Potential signals</span><b id="signal-count">0</b></div><div><span>Constraints / risks</span><b id="constraint-count">0</b></div><div><span>Unknowns</span><b id="coverage-unknown">0</b></div></div>
+          <div class="coverage-caption">Coverage is a count of what you entered, not a company score or a verified business outcome.</div>
+        </article>
+        <article class="card next-card">
+          <div class="card-heading compact"><div><div class="section-index">04 — FOLLOW THROUGH</div><h3>Next steps</h3></div><span id="task-count" class="badge muted">0 TASKS</span></div>
+          <form id="task-form" class="task-form"><label class="sr-only" for="new-task">Next step</label><input id="new-task" maxlength="240" placeholder="Add a next step…" required><div class="task-form-bottom"><label class="date-field"><span>Due date</span><input id="task-date" type="date"></label><button class="button button-outline" id="add-task" type="submit" disabled>Add task</button></div></form>
+          <ul id="task-list" class="task-list"><li class="empty-inline">No next steps yet.</li></ul>
+        </article>
+        <article class="card activity-card"><div class="card-heading compact"><div><div class="section-index">LOCAL CHANGE TRAIL</div><h3>Workspace activity</h3></div><span id="activity-count" class="badge muted">0 EVENTS</span></div><ul id="activity-list" class="activity-list"><li class="empty-inline">Your edits appear here for this browser session.</li></ul></article>
+        <article class="card export-card">
+          <div class="card-heading compact"><div><div class="section-index">PORTABLE BY DESIGN</div><h3>Your files stay yours</h3></div><span class="file-icon">↧</span></div>
+          <p>Export a Markdown brief for review, or a JSON project file to move or back up this workspace.</p>
+          <div class="export-buttons"><button class="button button-dark full" id="export-md" disabled>Export research brief (.md)</button><button class="button button-outline full" id="export-json" disabled>Export project data (.json)</button><label class="button button-ghost full import-label">Import project (.json)<input id="import-json" type="file" accept="application/json,.json"></label></div>
+          <div class="local-note"><span class="lock-icon">⌑</span><span>Opt in to local saving above. Otherwise your workspace exists only in this browser tab until you refresh.</span></div>
+        </article>
+      </aside>
+    </section>
+
+    <section id="report" class="report-section">
+      <div class="section-heading"><div><div class="section-index">05 — REVIEW BEFORE YOU SHARE</div><h2>Brief preview</h2></div><button class="button button-outline" id="mark-reviewed" disabled>Mark reviewed</button></div>
+      <div class="report-layout"><article class="report-sheet"><div class="report-topline"><span>ACCOUNT RESEARCH BRIEF</span><span id="report-date">NOT CREATED</span></div><div id="report-preview" class="report-preview"><div class="empty-report"><span class="empty-mark">R</span><h3>Your brief will appear here.</h3><p>Save an account and add source notes. The brief uses only the content you enter and labels each item by its source ID.</p></div></div><div id="review-status" class="review-status">NOT REVIEWED · DRAFT</div></article>
+        <article class="card draft-card"><div class="card-heading"><div class="step-number">06</div><div><h3>Optional outreach draft</h3><p>Build a draft from one selected observation. Edit it before reuse.</p></div></div><label class="field"><span>Choose a potential signal</span><select id="draft-evidence" disabled><option value="">Add a potential signal first</option></select></label><button class="button button-green full" id="generate-draft" disabled>Create draft from selected evidence</button><label class="field draft-field"><span>Internal draft</span><textarea id="draft-text" rows="7" maxlength="2000" placeholder="Your draft will appear here. Nothing can be sent from this page."></textarea></label><div class="draft-boundary"><span>NO SEND FUNCTION</span><p>This is an editable suggestion. It is not approved, addressed to a person, or sent.</p></div><button class="button button-outline full" id="save-draft" disabled>Save draft in this project</button></article></div>
+    </section>
+
+    <section id="privacy" class="method-section"><div class="method-heading"><div><div class="section-index">DESIGNED TO BE AUDITABLE</div><h2>Useful because it shows its work.</h2></div><p>This project turns Codex-assisted product development into a small tool with explicit evidence boundaries—not an autonomous sales agent.</p></div><div class="method-grid"><article><span class="method-number">A</span><h3>Evidence remains attached</h3><p>Every observation has a source title, HTTPS URL, user-selected classification, and confidence label. The app never fetches the page or claims to verify your note.</p></article><article><span class="method-number">B</span><h3>Unknown means unknown</h3><p>Signals and risks are classifications you choose. Open questions get their own list. Coverage counts do not turn into a fabricated lead score.</p></article><article><span class="method-number">C</span><h3>Approval has no send button</h3><p>The report has a review marker and an editable outreach draft. There is no email connection, contact action, or hidden automation.</p></article><article><span class="method-number">D</span><h3>Local-first, portable data</h3><p>There is no server database or analytics in this demo. Saving is opt-in and stays in your browser storage; JSON and Markdown exports give you control of your files.</p></article></div><details class="technical-details"><summary>Implementation notes and verification boundaries</summary><div class="details-content"><p>This standalone tool runs deterministically in the browser. It does not call an AI model, read a website, send data to an API, or send outreach. It creates a source-backed research pack and editable internal brief that a person can inspect and export.</p><p>This public tool runs deterministically in the browser. It does not call an AI model, read a website, send data to an API, or send outreach. Its purpose is to make a source-backed research pack and editable internal brief that a person can inspect and export.</p><p>OpenAI is not affiliated with or endorsing this independent demonstration.</p></div></details></section>
+  </main>
+  <footer class="wrap footer"><a class="brand footer-brand" href="#top"><span class="brand-mark">R</span><span><b>RESEARCH STUDIO</b><small>Codex Sales Research Studio</small></span></a><p>A small, inspectable workflow built with Codex.<br>Fictional sample data · no live crawl · no outreach.</p><a href="#top" class="back-top">Back to top ↑</a></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
